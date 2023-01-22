@@ -18,6 +18,9 @@ export const App = () =>{
     const [status, setStatus] = useState('idle');
     
     useEffect(() => {
+      if (!filter) {
+        return
+      }
       setStatus("loading")
       getPhotos(filter, page)
   .then(photo => {
