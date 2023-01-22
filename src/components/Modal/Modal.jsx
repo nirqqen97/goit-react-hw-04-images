@@ -9,18 +9,19 @@ const modalRoot = document.querySelector('#modal-root')
 export const Modal = ({onClose, children}) =>{
 
     useEffect(() => {
+        const handleKeyDown =  e => {
+            console.log("object");
+             if (e.code === "Escape") {
+             onClose()
+             }    
+         } 
         window.addEventListener('keydown',handleKeyDown)
         return () =>{
             window.removeEventListener('keydown',handleKeyDown)
         }
-    }, []);
+    }, [onClose]);
 
-   const handleKeyDown =  e => {
-       console.log("object");
-        if (e.code === "Escape") {
-        onClose()
-        }    
-    } 
+
     const onOverlayClick = (e) =>{
         if (e.currentTarget === e.target) {
               onClose()
@@ -34,5 +35,5 @@ export const Modal = ({onClose, children}) =>{
     )
 }
 Modal.propTypes = {
-    onCLose: PropTypes.func 
+    onClose: PropTypes.func 
 }
